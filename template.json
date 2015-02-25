@@ -7,7 +7,7 @@
       },
       ".travis.yml": {
         "template": true,
-        "content": "language: node_js\n\nnode_js:\n  - \"0.1{{#if harmony}}1{{else}}0{{/if}}\"\n"
+        "content": "language: node_js\n\nnode_js:\n  - \"iojs\"\n"
       },
       "LICENSE": {
         "template": true,
@@ -23,7 +23,7 @@
       },
       "package.json": {
         "template": true,
-        "content": "{\n  \"name\": \"{{name}}\",\n  \"version\": \"1.0.0\",\n  \"main\": \"index.js\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/{{repo}}.git\"\n  },\n  \"devDependencies\": {\n    \"jshint\": \"^2.5.6\",\n    \"jshint-stylish\": \"^1.0.0\",\n    \"mocha\": \"^1.21.4\",\n    \"must\": \"^0.12.0\"\n  },\n  \"scripts\": {\n    \"test\": \"mocha {{#if harmony}}--harmony {{/if}}--require must && jshint . --exclude-path .gitignore --reporter node_modules/jshint-stylish/stylish.js\"\n  },\n  \"author\": \"{{author}}\",\n  \"license\": \"BSD-3-Clause\",\n  \"jshintConfig\": {\n    \"node\": true,\n    \"mocha\": true{{#if harmony}},\n    \"esnext\": true\n    {{/if}}\n  }\n}\n"
+        "content": "{\n  \"name\": \"{{name}}\",\n  \"version\": \"1.0.0\",\n  \"main\": \"index.js\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/{{repo}}.git\"\n  },\n  \"devDependencies\": {\n    \"jshint\": \"^2.5.6\",\n    \"jshint-stylish\": \"^1.0.0\",\n    \"mocha\": \"^1.21.4\",\n    \"must\": \"^0.12.0\"\n  },\n  \"scripts\": {\n    \"test\": \"mocha --require must && jshint . --exclude-path .gitignore --reporter node_modules/jshint-stylish/stylish.js\"\n  },\n  \"author\": \"{{author}}\",\n  \"license\": \"BSD-3-Clause\",\n  \"jshintConfig\": {\n    \"node\": true,\n    \"mocha\": true,\n    \"esnext\": true\n    \n  }\n}\n"
       },
       "test": {
         "children": {

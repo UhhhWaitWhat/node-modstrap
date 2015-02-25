@@ -17,11 +17,6 @@ inquirer.prompt([{
 	type: "input",
 	name: "author",
 	message: "Your Name"
-},{
-	type: "confirm",
-	name: "harmony",
-	message: "Enable harmony features?",
-	default: false
 }], function(answers) {
 	answers.year = new Date().getFullYear();
 	var template = fs.readFileSync(path.join(__dirname, 'template.json'));
