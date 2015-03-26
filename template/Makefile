@@ -25,7 +25,7 @@ release-minor: test
 	@$(BIN)/bump --minor
 
 release-patch: test
-	@$(BIN)/bump --major
+	@$(BIN)/bump --patch
 
 publish:
 	git push --tags origin HEAD:master

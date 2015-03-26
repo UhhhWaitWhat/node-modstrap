@@ -18,7 +18,7 @@ release-minor: build lint
 	@$(BIN)/bump --minor
 
 release-patch: build lint
-	@$(BIN)/bump --major
+	@$(BIN)/bump --patch
 
 publish:
 	git push --tags origin HEAD:master
