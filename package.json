@@ -1,6 +1,5 @@
 {
   "name": "modstrap",
-  "description": "Bootstrap node modules",
   "version": "1.1.0",
   "description": "Bootstrap npm modules",
   "bin": "index.js",
@@ -11,8 +10,17 @@
   },
   "author": "Florian Albertz",
   "license": "BSD-3-Clause",
+  "scripts": {
+    "prepublish": "make && make lint",
+    "test": "make lint"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/PaulAvery/node-modstrap.git"
+  },
+  "devDependencies": {
+    "jshint": "^2.6.3",
+    "jshint-stylish": "^1.0.1",
+    "version-bump": "^0.1.0"
   }
 }

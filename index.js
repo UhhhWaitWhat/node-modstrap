@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 var tdir = require('tdir');
 var inquirer = require('inquirer');
 var hbs = require('handlebars');

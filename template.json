@@ -3,33 +3,41 @@
     "children": {
       ".gitignore": {
         "template": false,
-        "content": "node_modules\n"
+        "content": "node_modules\nlib"
       },
       ".travis.yml": {
-        "template": true,
+        "template": false,
         "content": "language: node_js\n\nnode_js:\n  - \"iojs\"\n"
       },
       "LICENSE": {
         "template": true,
         "content": "Copyright (c) {{year}}, {{author}}\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
       },
+      "Makefile": {
+        "template": false,
+        "content": "BIN = ./node_modules/.bin\nSRC = $(wildcard src/*.js)\nLIB = $(SRC:src/%.js=lib/%.js)\n\nbuild: babel\nbabel: $(LIB)\n\nlib/%.js: src/%.js\n\t@mkdir -p $(@D)\n\t@$(BIN)/babel $< --out-file $@\n\nclean:\n\t@rm -rf lib\n\ntest: build lint\n\tmocha --require must\n\nlint:\n\t@$(BIN)/jshint src --reporter node_modules/jshint-stylish/stylish.js\n\nrelease-major: test\n\t@$(BIN)/bump --major\n\nrelease-minor: test\n\t@$(BIN)/bump --minor\n\nrelease-patch: test\n\t@$(BIN)/bump --major\n\npublish:\n\tgit push --tags origin HEAD:master\n\tnpm publish\n"
+      },
       "README.md": {
         "template": true,
         "content": "{{name}}\n========\n[![Build Status](https://img.shields.io/travis/{{repo}}.svg?style=flat)](https://travis-ci.org/{{repo}})"
       },
-      "index.js": {
-        "template": false,
-        "content": ""
-      },
       "package.json": {
         "template": true,
-        "content": "{\n  \"name\": \"{{name}}\",\n  \"version\": \"1.0.0\",\n  \"main\": \"index.js\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/{{repo}}.git\"\n  },\n  \"devDependencies\": {\n    \"jshint\": \"^2.5.6\",\n    \"jshint-stylish\": \"^1.0.0\",\n    \"mocha\": \"^1.21.4\",\n    \"must\": \"^0.12.0\"\n  },\n  \"scripts\": {\n    \"test\": \"mocha --require must && jshint . --exclude-path .gitignore --reporter node_modules/jshint-stylish/stylish.js\"\n  },\n  \"author\": \"{{author}}\",\n  \"license\": \"BSD-3-Clause\",\n  \"jshintConfig\": {\n    \"node\": true,\n    \"mocha\": true,\n    \"esnext\": true\n    \n  }\n}\n"
+        "content": "{\n  \"name\": \"{{name}}\",\n  \"version\": \"1.0.0\",\n  \"main\": \"lib/index.js\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/{{repo}}.git\"\n  },\n  \"devDependencies\": {\n    \"jshint\": \"^2.5.6\",\n    \"jshint-stylish\": \"^1.0.0\",\n    \"mocha\": \"^1.21.4\",\n    \"must\": \"^0.12.0\",\n    \"version-bump\": \"^0.1.0\",\n    \"babel\": \"^4.7.16\"\n  },\n  \"scripts\": {\n    \"test\": \"make test\",\n    \"prepublish\": \"make test\"\n  },\n  \"author\": \"{{author}}\",\n  \"license\": \"BSD-3-Clause\",\n  \"jshintConfig\": {\n    \"node\": true,\n    \"esnext\": true  \n  }\n}\n"
+      },
+      "src": {
+        "children": {
+          "index.js": {
+            "template": false,
+            "content": "\"use strict\";"
+          }
+        }
       },
       "test": {
         "children": {
           "index.js": {
             "template": false,
-            "content": ""
+            "content": "/* jshint mocha: true */"
           }
         }
       }
