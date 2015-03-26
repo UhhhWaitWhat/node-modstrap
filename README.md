@@ -10,8 +10,20 @@ This module will ask you for some data and then creates a new directory containi
 	.travis.yml
 	LICENSE
 	README.md
-	index.js
+	Makefile
 	package.json
+	src/index.js
 	test/index.js
 
-It will fill them with provided data and sensible defaults.
+It will fill them with provided data and sensible defaults (in my opinion).
+
+Makefile
+--------
+The `Makefile` provides the following tasks:
+
+* **build**: Runs everything in `src` through babel and outputs to `lib`.
+* **clean**: Removes `lib`
+* **test**: Runs mocha
+* **lint**: Runs jshint over `src`
+* **release-{major,minor,patch}**: Increases version number and creates git tag 
+* **publish**: Pushes to git and npm
