@@ -9,7 +9,7 @@ clean:
 	@rm -rf template.json
 
 lint:
-	@$(BIN)/jshint index.js --reporter node_modules/jshint-stylish/stylish.js
+	@$(BIN)/eslint index.js
 
 release-major: build lint
 	@$(BIN)/bump --major

@@ -19,8 +19,26 @@
     "url": "https://github.com/PaulAvery/node-modstrap.git"
   },
   "devDependencies": {
-    "jshint": "^2.6.3",
-    "jshint-stylish": "^1.0.1",
+    "eslint": "^0.18.0",
     "version-bump": "^0.1.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "rules": {
+      "curly": [
+        2,
+        "multi-line"
+      ],
+      "quotes": [
+        2,
+        "single"
+      ]
+    },
+    "ecmaFeatures": {
+      "modules": true
+    }
   }
 }

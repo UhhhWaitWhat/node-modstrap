@@ -15,7 +15,7 @@
       },
       "Makefile": {
         "template": false,
-        "content": "BIN = ./node_modules/.bin\nSRC = $(wildcard src/*.js)\nLIB = $(SRC:src/%.js=lib/%.js)\n\nbuild: babel\nbabel: $(LIB)\n\nlib/%.js: src/%.js\n\t@mkdir -p $(@D)\n\t@$(BIN)/babel $< --out-file $@\n\nclean:\n\t@rm -rf lib\n\ntest: build lint\n\tmocha --require must\n\nlint:\n\t@$(BIN)/jshint src --reporter node_modules/jshint-stylish/stylish.js\n\nrelease-major: test\n\t@$(BIN)/bump --major\n\nrelease-minor: test\n\t@$(BIN)/bump --minor\n\nrelease-patch: test\n\t@$(BIN)/bump --major\n\npublish:\n\tgit push --tags origin HEAD:master\n\tnpm publish\n"
+        "content": "BIN = ./node_modules/.bin\nSRC = $(wildcard src/*.js)\nLIB = $(SRC:src/%.js=lib/%.js)\n\nbuild: babel\nbabel: $(LIB)\n\nlib/%.js: src/%.js\n\t@mkdir -p $(@D)\n\t@$(BIN)/babel $< --out-file $@\n\nclean:\n\t@rm -rf lib\n\ntest: build lint\n\tmocha --require must\n\nlint:\n\t@$(BIN)/eslint src\n\nrelease-major: test\n\t@$(BIN)/bump --major\n\nrelease-minor: test\n\t@$(BIN)/bump --minor\n\nrelease-patch: test\n\t@$(BIN)/bump --patch\n\npublish:\n\tgit push --tags origin HEAD:master\n\tnpm publish\n"
       },
       "README.md": {
         "template": true,
@@ -23,13 +23,13 @@
       },
       "package.json": {
         "template": true,
-        "content": "{\n  \"name\": \"{{name}}\",\n  \"version\": \"1.0.0\",\n  \"main\": \"lib/index.js\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/{{repo}}.git\"\n  },\n  \"devDependencies\": {\n    \"jshint\": \"^2.5.6\",\n    \"jshint-stylish\": \"^1.0.0\",\n    \"mocha\": \"^1.21.4\",\n    \"must\": \"^0.12.0\",\n    \"version-bump\": \"^0.1.0\",\n    \"babel\": \"^4.7.16\"\n  },\n  \"scripts\": {\n    \"test\": \"make test\",\n    \"prepublish\": \"make test\"\n  },\n  \"author\": \"{{author}}\",\n  \"license\": \"BSD-3-Clause\",\n  \"jshintConfig\": {\n    \"node\": true,\n    \"esnext\": true  \n  }\n}\n"
+        "content": "{\n  \"name\": \"{{name}}\",\n  \"version\": \"1.0.0\",\n  \"main\": \"lib/index.js\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/{{repo}}.git\"\n  },\n  \"devDependencies\": {\n    \"eslint\": \"^0.18.0\",\n    \"mocha\": \"^1.21.4\",\n    \"must\": \"^0.12.0\",\n    \"version-bump\": \"^0.1.0\",\n    \"babel\": \"^4.7.16\"\n  },\n  \"scripts\": {\n    \"test\": \"make test\",\n    \"prepublish\": \"make test\"\n  },\n  \"author\": \"{{author}}\",\n  \"license\": \"BSD-3-Clause\",\n  \"eslintConfig\": {\n    \"env\": {\n      \"es6\": true,\n      \"node\": true\n    },\n    \"rules\": {\n      \"curly\": [2, \"multi-line\"],\n      \"quotes\": [2, \"single\"]\n    },\n    \"ecmaFeatures\": {\n      \"modules\": true\n    }\n  }\n}\n"
       },
       "src": {
         "children": {
           "index.js": {
             "template": false,
-            "content": "\"use strict\";"
+            "content": "'use strict';"
           }
         }
       },
@@ -37,7 +37,7 @@
         "children": {
           "index.js": {
             "template": false,
-            "content": "/* jshint mocha: true */"
+            "content": "/* eslint-env mocha */"
           }
         }
       }

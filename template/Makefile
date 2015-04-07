@@ -16,7 +16,7 @@ test: build lint
 	mocha --require must
 
 lint:
-	@$(BIN)/jshint src --reporter node_modules/jshint-stylish/stylish.js
+	@$(BIN)/eslint src
 
 release-major: test
 	@$(BIN)/bump --major
