@@ -7,16 +7,16 @@ babel: $(LIB)
 
 lib/%.js: src/%.js
 	@mkdir -p $(@D)
-	@$(BIN)/babel $< --out-file $@
+	@$(BIN)/babel $< --out-file $@ --source-maps-inline --blacklist regenerator
 
 clean:
 	@rm -rf lib
 
 test: build lint
-	mocha --require must
+	@$(BIN)/mocha --harmony --require must
 
 lint:
-	@$(BIN)/eslint src
+	@$(BIN)/eslint src test
 
 release-major: test
 	@$(BIN)/bump --major
