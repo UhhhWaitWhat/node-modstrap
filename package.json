@@ -1,6 +1,6 @@
 {
   "name": "modstrap",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Bootstrap npm modules",
   "bin": "index.js",
   "dependencies": {
