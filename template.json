@@ -7,7 +7,7 @@
       },
       ".travis.yml": {
         "template": false,
-        "content": "language: node_js\n\nnode_js:\n  - \"iojs\"\n"
+        "content": "language: node_js\n\nnode_js:\n  - \"0.12\"\n  - \"iojs\"\n"
       },
       "LICENSE": {
         "template": true,
@@ -15,7 +15,7 @@
       },
       "Makefile": {
         "template": false,
-        "content": "BIN = ./node_modules/.bin\nSRC = $(wildcard src/*.js)\nLIB = $(SRC:src/%.js=lib/%.js)\n\nbuild: babel\nbabel: $(LIB)\n\nlib/%.js: src/%.js\n\t@mkdir -p $(@D)\n\t@$(BIN)/babel $< --out-file $@\n\nclean:\n\t@rm -rf lib\n\ntest: build lint\n\tmocha --require must\n\nlint:\n\t@$(BIN)/eslint src\n\nrelease-major: test\n\t@$(BIN)/bump --major\n\nrelease-minor: test\n\t@$(BIN)/bump --minor\n\nrelease-patch: test\n\t@$(BIN)/bump --patch\n\npublish:\n\tgit push --tags origin HEAD:master\n\tnpm publish\n"
+        "content": "BIN = ./node_modules/.bin\nSRC = $(wildcard src/*.js)\nLIB = $(SRC:src/%.js=lib/%.js)\n\nbuild: babel\nbabel: $(LIB)\n\nlib/%.js: src/%.js\n\t@mkdir -p $(@D)\n\t@$(BIN)/babel $< --out-file $@ --source-maps-inline --blacklist regenerator\n\nclean:\n\t@rm -rf lib\n\ntest: build lint\n\t@$(BIN)/mocha --harmony --require must\n\nlint:\n\t@$(BIN)/eslint src test\n\nrelease-major: test\n\t@$(BIN)/bump --major\n\nrelease-minor: test\n\t@$(BIN)/bump --minor\n\nrelease-patch: test\n\t@$(BIN)/bump --patch\n\npublish:\n\tgit push --tags origin HEAD:master\n\tnpm publish\n"
       },
       "README.md": {
         "template": true,
@@ -29,7 +29,7 @@
         "children": {
           "index.js": {
             "template": false,
-            "content": "'use strict';"
+            "content": "'use strict';\n"
           }
         }
       },
@@ -37,7 +37,7 @@
         "children": {
           "index.js": {
             "template": false,
-            "content": "/* eslint-env mocha */"
+            "content": "/* eslint-env mocha */\n"
           }
         }
       }
